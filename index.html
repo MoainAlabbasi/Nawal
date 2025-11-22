@@ -3,124 +3,571 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>موقع تعليم الحوسبة</title>
+    <title>موقع تعليم الحوسبة - احترافي</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
     <style>
-        /* --- تنسيقات CSS --- */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f4f9;
-            color: #333;
+        * {
             margin: 0;
             padding: 0;
-            text-align: center;
+            box-sizing: border-box;
         }
 
+        :root {
+            --primary: #7c3aed;
+            --secondary: #06b6d4;
+            --accent: #ec4899;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.15);
+            --shadow-glow: 0 0 30px rgba(124, 58, 237, 0.3);
+        }
+
+        body {
+            font-family: 'Tajawal', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            color: var(--dark);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Animated Background Particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            animation: float 20s infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) translateX(0) scale(1);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100px) scale(0);
+                opacity: 0;
+            }
+        }
+
+        /* Header Styles */
         header {
-            background-color: #2c3e50;
-            color: white;
-            padding: 20px 0;
+            position: relative;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 60px 20px;
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+            z-index: 10;
         }
 
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 200%; }
+        }
+
+        header h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 900;
+            background: linear-gradient(135deg, #fff, #a78bfa, #fbbf24);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            animation: slideDown 1s ease-out;
+            position: relative;
+            z-index: 2;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        header p {
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            color: #cbd5e1;
+            font-weight: 400;
+            animation: fadeIn 1.5s ease-out;
+            position: relative;
+            z-index: 2;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Container */
         .container {
-            width: 80%;
-            margin: 30px auto;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: -40px auto 60px;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+            position: relative;
+            z-index: 10;
         }
 
+        /* Lesson Cards */
         .lesson-card {
-            background: white;
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            width: 300px;
-            transition: transform 0.3s;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: scaleIn 0.8s ease-out backwards;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .lesson-card:nth-child(1) {
+            animation-delay: 0.2s;
+        }
+
+        .lesson-card:nth-child(2) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8) translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .lesson-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: var(--gradient-1);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s ease;
+        }
+
+        .lesson-card:nth-child(2)::before {
+            background: var(--gradient-3);
+        }
+
+        .lesson-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .lesson-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(124, 58, 237, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .lesson-card:hover::after {
+            opacity: 1;
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
         .lesson-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 20px 60px rgba(124, 58, 237, 0.3);
         }
 
+        .lesson-card h2 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--dark);
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            animation: pulse 2s ease-in-out infinite;
+            box-shadow: var(--shadow-glow);
+        }
+
+        .lesson-card:nth-child(2) .icon {
+            background: var(--gradient-3);
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 0 20px rgba(124, 58, 237, 0.3);
+            }
+            50% {
+                transform: scale(1.1);
+                box-shadow: 0 0 40px rgba(124, 58, 237, 0.6);
+            }
+        }
+
+        .lesson-card p {
+            font-size: 1.1rem;
+            color: #64748b;
+            line-height: 1.8;
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Button Styles */
         button {
-            background-color: #3498db;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
+            padding: 15px 35px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 700;
             cursor: pointer;
-            margin-top: 10px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            z-index: 2;
+        }
+
+        button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        button:hover::before {
+            width: 300px;
+            height: 300px;
         }
 
         button:hover {
-            background-color: #2980b9;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
+        }
+
+        button:active {
+            transform: translateY(-1px);
+        }
+
+        button span {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Details Section */
+        .details {
+            margin-top: 25px;
+            padding: 25px;
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.05), rgba(6, 182, 212, 0.05));
+            border-radius: 16px;
+            border-right: 4px solid var(--primary);
+            animation: slideIn 0.5s ease-out;
+            position: relative;
+            z-index: 2;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                max-height: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                max-height: 500px;
+                transform: translateY(0);
+            }
+        }
+
+        .details.hidden {
+            display: none;
         }
 
         code {
-            background-color: #eee;
-            padding: 2px 5px;
-            border-radius: 3px;
-            font-family: monospace;
-            color: #d35400;
+            background: rgba(15, 23, 42, 0.9);
+            color: #fbbf24;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+            font-weight: 600;
+            display: inline-block;
+            margin: 8px 5px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
         }
 
+        code:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(251, 191, 36, 0.3);
+        }
+
+        /* Footer */
         footer {
-            margin-top: 50px;
-            padding: 20px;
-            background-color: #ecf0f1;
-            color: #7f8c8d;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(20px);
+            color: #cbd5e1;
+            padding: 40px 20px;
+            text-align: center;
+            margin-top: 60px;
+            position: relative;
+            z-index: 10;
+            box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        footer p {
+            font-size: 1.1rem;
+            animation: fadeIn 2s ease-out;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header {
+                padding: 40px 20px;
+            }
+
+            .container {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                margin-top: -30px;
+            }
+
+            .lesson-card {
+                padding: 30px;
+            }
+
+            .lesson-card h2 {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Loading Animation */
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
         }
     </style>
 </head>
 <body>
+    <!-- Animated Particles Background -->
+    <div class="particles" id="particles"></div>
 
     <header>
-        <h1>مقدمة في الحوسبة وإدارة النسخ</h1>
-        <p>تعلم أساسيات Git و GitHub والعمل التعاوني</p>
+        <h1>🎓 مقدمة في الحوسبة وإدارة النسخ</h1>
+        <p>تعلم أساسيات Git و GitHub والعمل التعاوني بطريقة احترافية وتفاعلية</p>
     </header>
 
     <div class="container">
         <section id="lesson1" class="lesson-card">
-            <h2>الدرس الأول: أوامر Git الأساسية</h2>
-            <p>في هذا الدرس نتعلم كيفية تهيئة المستودع وحفظ التغييرات.</p>
-            <button onclick="showDetails('msg1')">عرض التفاصيل</button>
-            <p id="msg1" class="details" style="display:none; margin-top:10px;">
-                أهم الأوامر هي: <br>
-                <code>git init</code> - لتهيئة المستودع<br>
-                <code>git add</code> - لإضافة الملفات<br>
-                <code>git commit</code> - لحفظ التغييرات
-            </p>
+            <h2>
+                <span class="icon">💻</span>
+                الدرس الأول: أوامر Git الأساسية
+            </h2>
+            <p>في هذا الدرس نتعلم كيفية تهيئة المستودع وحفظ التغييرات بشكل احترافي ومنظم.</p>
+            <button onclick="toggleDetails('msg1')">
+                <span>عرض التفاصيل ✨</span>
+            </button>
+            <div id="msg1" class="details hidden">
+                <p><strong>أهم الأوامر الأساسية:</strong></p>
+                <code>git init</code> - لتهيئة المستودع الجديد<br>
+                <code>git add .</code> - لإضافة جميع الملفات<br>
+                <code>git commit -m "message"</code> - لحفظ التغييرات مع رسالة<br>
+                <code>git status</code> - لمعرفة حالة المستودع<br>
+                <code>git log</code> - لعرض سجل التغييرات
+            </div>
         </section>
 
         <section id="lesson2" class="lesson-card">
-            <h2>الدرس الثاني: التعاون (Collaborations)</h2>
-            <p>كيفية العمل مع فريق ودمج التغييرات.</p>
-            <button onclick="showDetails('msg2')">عرض التفاصيل</button>
-            <p id="msg2" class="details" style="display:none; margin-top:10px;">
-                للتعاون نستخدم:<br>
-                <code>git push</code> - لرفع التغييرات<br>
-                <code>git pull</code> - لسحب التغييرات<br>
-                <code>git clone</code> - لنسخ المستودع
-            </p>
+            <h2>
+                <span class="icon">🤝</span>
+                الدرس الثاني: التعاون (Collaborations)
+            </h2>
+            <p>كيفية العمل مع فريق ودمج التغييرات بطريقة احترافية وتجنب التعارضات.</p>
+            <button onclick="toggleDetails('msg2')">
+                <span>عرض التفاصيل ✨</span>
+            </button>
+            <div id="msg2" class="details hidden">
+                <p><strong>أوامر التعاون الأساسية:</strong></p>
+                <code>git push origin main</code> - لرفع التغييرات للمستودع البعيد<br>
+                <code>git pull origin main</code> - لسحب آخر التحديثات<br>
+                <code>git clone [url]</code> - لنسخ المستودع كاملاً<br>
+                <code>git branch</code> - لإنشاء فرع جديد<br>
+                <code>git merge</code> - لدمج الفروع
+            </div>
         </section>
     </div>
 
     <footer>
-        <p>تم تطوير هذا الموقع للأغراض التعليمية</p>
+        <p>✨ تم تطوير هذا الموقع للأغراض التعليمية بتصميم احترافي وعصري ✨</p>
     </footer>
 
     <script>
-        /* --- أكواد Javascript --- */
-        function showDetails(id) {
-            var details = document.getElementById(id);
-            if (details.style.display === "none") {
-                details.style.display = "block";
+        // Toggle Details Function with Animation
+        function toggleDetails(id) {
+            const details = document.getElementById(id);
+            const button = details.previousElementSibling;
+            
+            if (details.classList.contains('hidden')) {
+                details.classList.remove('hidden');
+                button.innerHTML = '<span>إخفاء التفاصيل 🔼</span>';
             } else {
-                details.style.display = "none";
+                details.classList.add('hidden');
+                button.innerHTML = '<span>عرض التفاصيل ✨</span>';
             }
         }
-    </script>
 
+        // Create Animated Particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Random position
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                
+                // Random animation delay and duration
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Initialize particles on page load
+        window.addEventListener('load', createParticles);
+
+        // Add smooth scroll behavior
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add intersection observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all lesson cards
+        document.querySelectorAll('.lesson-card').forEach(card => {
+            observer.observe(card);
+        });
+    </script>
 </body>
 </html>
