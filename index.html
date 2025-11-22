@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>موقع تعليم الحوسبة</title>
+    <style>
+        /* --- تنسيقات CSS --- */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 30px auto;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .lesson-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            width: 300px;
+            transition: transform 0.3s;
+        }
+
+        .lesson-card:hover {
+            transform: translateY(-5px);
+        }
+
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        code {
+            background-color: #eee;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: monospace;
+            color: #d35400;
+        }
+
+        footer {
+            margin-top: 50px;
+            padding: 20px;
+            background-color: #ecf0f1;
+            color: #7f8c8d;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>مقدمة في الحوسبة وإدارة النسخ</h1>
+        <p>تعلم أساسيات Git و GitHub والعمل التعاوني</p>
+    </header>
+
+    <div class="container">
+        <section id="lesson1" class="lesson-card">
+            <h2>الدرس الأول: أوامر Git الأساسية</h2>
+            <p>في هذا الدرس نتعلم كيفية تهيئة المستودع وحفظ التغييرات.</p>
+            <button onclick="showDetails('msg1')">عرض التفاصيل</button>
+            <p id="msg1" class="details" style="display:none; margin-top:10px;">
+                أهم الأوامر هي: <br>
+                <code>git init</code> - لتهيئة المستودع<br>
+                <code>git add</code> - لإضافة الملفات<br>
+                <code>git commit</code> - لحفظ التغييرات
+            </p>
+        </section>
+
+        <section id="lesson2" class="lesson-card">
+            <h2>الدرس الثاني: التعاون (Collaborations)</h2>
+            <p>كيفية العمل مع فريق ودمج التغييرات.</p>
+            <button onclick="showDetails('msg2')">عرض التفاصيل</button>
+            <p id="msg2" class="details" style="display:none; margin-top:10px;">
+                للتعاون نستخدم:<br>
+                <code>git push</code> - لرفع التغييرات<br>
+                <code>git pull</code> - لسحب التغييرات<br>
+                <code>git clone</code> - لنسخ المستودع
+            </p>
+        </section>
+    </div>
+
+    <footer>
+        <p>تم تطوير هذا الموقع للأغراض التعليمية</p>
+    </footer>
+
+    <script>
+        /* --- أكواد Javascript --- */
+        function showDetails(id) {
+            var details = document.getElementById(id);
+            if (details.style.display === "none") {
+                details.style.display = "block";
+            } else {
+                details.style.display = "none";
+            }
+        }
+    </script>
+
+</body>
+</html>
